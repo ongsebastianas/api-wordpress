@@ -8,7 +8,7 @@ function interested_person_post($request) {
     $gender = sanitize_text_field($request['gender']);
 
     if(validate_inputs(array($name, $email, $gender))) {
-        if (email_exists($email)) {
+        if (check_email($email)) {
             $response = new WP_Error('error', 'Email já cadastrado.', array('status' => 403));
         } else {
             $token = rand(100000, 10000000);

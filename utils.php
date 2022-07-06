@@ -10,7 +10,7 @@ function validate_inputs($input_array) {
     return true;
 }
 
-function email_exists($email) {
+function check_email($email) {
     $posts = get_posts(array(
         'post_type' => 'interested_person',
         'meta_key' => 'email',
