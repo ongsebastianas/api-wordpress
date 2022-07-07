@@ -1,6 +1,7 @@
 <?php
 
 include dirname(__FILE__).'/../utils.php';
+include dirname(__FILE__).'/../email-templates/verification-email.php';
 
 function interested_person_post($request) {
     $name = sanitize_text_field($request['name']);
@@ -28,6 +29,8 @@ function interested_person_post($request) {
             
             $interested_person_id = wp_insert_post($response);
             $response['id'] = get_post_field('post_name', $interested_person_id);
+
+            wp_mail("$email", "Verificação de E-mail", get_verification_email_template($token));
         }
     } else {
         $response = new WP_Error('error', 'Campos inválidos.', array('status' => 403));
