@@ -19,3 +19,19 @@ function check_email($email) {
 
     return count($posts);
 }
+
+function find_interested_person($email) {
+    $interested_person = get_posts(array(
+        'fields' => 'ids',
+        'numberposts' => 1,
+        'post_type' => 'interested_person',
+        'meta_query' => array(
+            array(
+                'key' => 'email',
+                'value' => $email,
+            ),
+        ),
+    ));
+
+    return $interested_person;
+}
